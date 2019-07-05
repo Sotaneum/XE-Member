@@ -15,3 +15,7 @@ Xpress Engine Default Board Skin
 
 - 한글이름/영문이름/이메일/상세내용 화면에 표시
 - 한 화면에 표시 가능한 Member 수 고정
+
+## 1.0.0
+
+- 정식
