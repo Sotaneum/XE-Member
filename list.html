@@ -21,31 +21,31 @@
 			<!-- LIST -->
 			<tr loop="$document_list=>$no,$document">
 				<block loop="$list_config=>$key,$val">
-				<td width="200px" height="300px" class="extra_image" cond="$val->name=='사진' && $val->idx!=-1">
-					<img width="200px" height="300px" src={$document->getExtraValueHTML($val->idx)}>
-				</td>
+					<td width="200px" height="300px" cond="$val->type=='thumbnail' && $val->idx==-1">
+						<img cond="$document->getThumbnail(200,300)!=null" width="200px" height="300px" src={$document->getThumbnail(200,300)}>
+						<img cond="$document->getThumbnail(200,300)==null" width="200px" height="300px" src="./no_picture.png">
+					</td>
 				</block>
 				<td width="100%" height="100%">
 					<table style="border: 0px;">
 						<tr>
-							<block loop="$list_config=>$key,$val">
-							<td style="border: 0px;" class="extra_level" cond="$val->name=='등급' && $val->idx!=-1"><font size=4 color="orange" style="font-weight: bold;">{$document->getExtraValueHTML($val->idx)}</font></td>
-							</block>
+							<td style="border: 0px;"><font size=4 color="orange" style="font-weight: bold;">{$category_list[$document->get('category_srl')]->title}</font></td>
 						</tr>
 						<tr>
 							<td style="border: 0px;">
 								<block loop="$list_config=>$key,$val">
 								<font size=6 style="font-weight: bold;" cond="$val->type=='title' && $val->idx==-1"><a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}">{$document->getTitle()}</a></font>&nbsp;&nbsp;
-								<font size=3 style="font-weight: bold;" cond="$val->name=='영문이름' && $val->idx!=-1 && $document->getExtraValueHTML($val->idx)!=''">/{$document->getExtraValueHTML($val->idx)}</font>
+								<font size=3 style="font-weight: bold;" cond="$val->name=='subTitle' && $val->idx!=-1 && $document->getExtraValueHTML($val->idx)!=''">/{$document->getExtraValueHTML($val->idx)}</font>
 								</block>
 							</td>
 						</tr>
-						<block loop="$list_config=>$key,$val">
-						<tr cond="($val->name=='이메일' || $val->name=='경력') && $document->getExtraValueHTML($val->idx)!=''">
-							<td style="border: 0px;" class="extra_email" cond="$val->name=='이메일' && $val->idx!=-1">&nbsp;<img src="http://mcalab.kunsan.ac.kr:8080/files/attach/filebox/232/232.png" width="32px" height="32px">&nbsp;{$document->getExtraValueHTML($val->idx)}</td>
-							<td style="border: 0px;" class="extra_career" cond="$val->name=='경력' && $val->idx!=-1">{$document->getExtraValueHTML($val->idx)}</td>
+						
+						<tr>
+							<td style="border: 0px;" class="extra_email">&nbsp;<img src="./phone.png" width="32px" height="32px">&nbsp;{$document->getExtraValueHTML($val->idx)}</td>						
 						</tr>
-						</block>
+						<tr>
+							<td style="border: 0px;">{$document->getContent(false)}</td>
+						</tr>
 					</table>
 				</td>
 				<td cond="$grant->manager" class="check"><input type="checkbox" name="cart" value="{$document->document_srl}" class="iCheck" title="Check This Article" onclick="doAddDocumentCart(this)" checked="checked"|cond="$document->isCarted()" /></td>

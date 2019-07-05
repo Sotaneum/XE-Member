@@ -19,3 +19,7 @@ Xpress Engine Default Board Skin
 ## 1.0.0
 
 - 정식
+
+## 1.1.0
+
+- 이미지가 없을 때 비어있다는 이미지 표시
